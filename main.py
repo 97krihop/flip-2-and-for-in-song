@@ -5,33 +5,31 @@ from pydub import AudioSegment
 
 
 def main(argv):
-    inputfile = ''
-    outputfile = ''
+    input_file = ''
+    output_file = ''
     bpm = ''
     try:
         opts, args = getopt.getopt(argv, "hi:o:b:", ["ifile=", "ofile=", "bpm="])
     except getopt.GetoptError:
-        print
-        'test.py -i <inputfile>.wav -o <outputfile>.wav -b <bpm>'
+        print('test.py -i <inputFile>.wav -o <outputFile>.wav -b <bpm>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print
-            'test.py -i <inputfile>.wav -o <outputfile>.wav -b <bpm>'
+            print('test.py -i <inputFile>.wav -o <outputFile>.wav -b <bpm>')
             sys.exit()
         elif opt in ("-i", "--ifile"):
-            inputfile = arg
+            input_file = arg
         elif opt in ("-o", "--ofile"):
-            outputfile = arg
+            output_file = arg
         elif opt in ("-b", "--bpm"):
             bpm = arg
-    if inputfile == "" or bpm == "":
+    if input_file == "" or bpm == "":
         exit(1)
     else:
-        if outputfile == "":
-            convert(inputfile, bpm)
+        if output_file == "":
+            convert(input_file, bpm)
         else:
-            convert(inputfile, bpm, outputfile)
+            convert(input_file, bpm, output_file)
 
 
 def convert(infile, bpm, outfile="tmp/output.wav"):
