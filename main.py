@@ -1,4 +1,5 @@
 import getopt
+import math
 import sys
 
 from pydub import AudioSegment
@@ -35,13 +36,13 @@ def main(argv):
 def convert(infile, bpm, outfile="tmp/output.wav"):
     song = AudioSegment.from_wav(infile)
 
-    one_beat = 60_000 / int(bpm) * 4
-    slices = song[::round(one_beat)]
+    one_beat = 60_000 / float(bpm) * 4
+    slices = song[::math.floor(one_beat)+1]
     output = AudioSegment.empty()
 
     for beat in slices:
         length = len(beat) / 4
-        beats = list(beat[::round(length)])
+        beats = list(beat[::math.floor(length)+1])
         output += beats[0]
         output += beats[3]
         output += beats[2]
