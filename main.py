@@ -37,12 +37,12 @@ def convert(infile, bpm, outfile="tmp/output.wav"):
     song = AudioSegment.from_wav(infile)
 
     one_beat = 60_000 / float(bpm) * 4
-    slices = song[::math.floor(one_beat)+1]
+    slices = song[::math.floor(one_beat)]
     output = AudioSegment.empty()
 
     for beat in slices:
         length = len(beat) / 4
-        beats = list(beat[::math.floor(length)+1])
+        beats = list(beat[::math.floor(length)])
         output += beats[0]
         output += beats[3]
         output += beats[2]
